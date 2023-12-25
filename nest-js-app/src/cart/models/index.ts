@@ -1,6 +1,7 @@
 export enum CartStatuses {
   OPEN = 'OPEN',
   STATUS = 'STATUS',
+  ORDERED = 'ORDERED',
 }
 
 export type Product = {
@@ -11,6 +12,8 @@ export type Product = {
 };
 
 export type CartItem = {
+  cart_id: string;
+  product_id: string;
   product: Product;
   count: number;
 };
@@ -18,8 +21,8 @@ export type CartItem = {
 export type Cart = {
   id: string;
   user_id: string;
-  created_at: string;
-  updated_at: string;
-  status: CartStatuses;
-  items: CartItem[];
+  created_at: Date | string;
+  updated_at: Date | string;
+  status: CartStatuses | string;
+  // items: CartItem[];
 };
