@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 // import all entities here
 // User, Cart, CartItem, Order
-import { CartEntity } from './entities/Cart.entity';
+import { CartEntity } from './entities/cart.entity';
 import { CartItemEntity } from './entities/cart_item.entity';
 import { OrderEntity } from './entities/order.entity';
 import { UserEntity } from './entities/user.entity';
@@ -17,9 +17,12 @@ import { UserEntity } from './entities/user.entity';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: ['dist/database/entities/*.entity{.ts,.js}'],
+      entities: [UserEntity, CartEntity, CartItemEntity, OrderEntity],
       logging: true,
       namingStrategy: new SnakeNamingStrategy(),
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
     TypeOrmModule.forFeature([
       UserEntity,

@@ -10,7 +10,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import serverlessExpress from '@vendia/serverless-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-let server: Handler | void;
+let server: Handler;
 
 const port = process.env.PORT || 4000;
 
@@ -43,21 +43,21 @@ async function bootstrap() {
     await app.listen(port);
 
     server = serverlessExpress({ app: expressApp });
-  } else {
-    return server;
   }
+  return server;
 }
 
-// bootstrap().then(() => {
-//   console.log('App is running on %s port', port);
-// });
+bootstrap().then(() => {
+  console.log('App is running on %s port', port);
+});
 
 export const handler: Handler = async (
   event: any,
   context: Context,
   callback: Callback,
 ) => {
+  console.log(process.env);
   const server = await bootstrap();
-  console.log('App is running on %s port', port);
+  console.log('App is running on port ', port);
   return server(event, context, callback);
 };

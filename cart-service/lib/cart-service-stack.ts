@@ -8,6 +8,8 @@ import {
   RestApi,
 } from 'aws-cdk-lib/aws-apigateway';
 
+require('dotenv').config();
+
 export class CartServiceStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -20,10 +22,13 @@ export class CartServiceStack extends cdk.Stack {
         runtime: lambda.Runtime.NODEJS_18_X,
         code: lambda.Code.fromAsset('../nest-js-app/dist'),
         handler: 'main.handler',
-        // environment: {
-        //   PRODUCTS_TABLE_NAME: productsDbTable.tableName,
-        //   STOCK_TABLE_NAME: stockDbTable.tableName,
-        // },
+        environment: {
+          DATABASE_HOST: process.env.DATABASE_HOST || '',
+          DATABASE_PORT: process.env.DATABASE_PORT || '5432',
+          DATABASE_USERNAME: process.env.DATABASE_USERNAME || '',
+          DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || '',
+          DATABASE_NAME: process.env.DATABASE_NAME || '',
+        },
       }
     );
 

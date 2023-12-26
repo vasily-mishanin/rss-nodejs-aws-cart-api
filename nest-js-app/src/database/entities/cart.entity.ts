@@ -4,8 +4,10 @@ import {
   Column,
   OneToMany,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
-//import { CartItemEntity } from './cart-item.entity'; // Assuming you have a CartItemEntity
+import { CartItemEntity } from './cart_item.entity';
+import { CartStatuses } from 'src/cart';
 
 @Entity('cart')
 export class CartEntity {
@@ -20,19 +22,22 @@ export class CartEntity {
     default: new Date().toString(),
     nullable: false,
   })
-  created_at: Date;
+  created_at: Date | string;
 
   @Column({ type: 'timestamp', default: '', nullable: false })
-  updated_at: Date;
+  updated_at: Date | string;
 
   @Column({
     type: 'enum',
-    enum: ['OPEN', 'ORDERED'],
+    enum: ['OPEN', 'ORDERED', 'STATUS'],
     default: 'OPEN',
     nullable: false,
   })
-  status: string;
+  status: CartStatuses | string;
 
-  //   @OneToMany(() => CartItemEntity, cartItem => cartItem.cart)
-  //   items: CartItemEntity[];
+  @OneToMany(() => CartItemEntity, (cart_item) => cart_item.cart, {
+    cascade: true,
+  })
+  @JoinColumn({ name: 'id', referencedColumnName: 'cart_id' })
+  cart_items: CartItemEntity[];
 }

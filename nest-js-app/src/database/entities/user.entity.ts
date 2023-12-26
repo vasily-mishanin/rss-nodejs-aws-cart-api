@@ -12,12 +12,12 @@ export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'string', nullable: false })
+  @Column({ type: 'text', nullable: false })
   name: string;
 
-  @Column({ type: 'string', nullable: false })
+  @Column({ type: 'text', nullable: false })
   email: string;
 
-  @Column({ type: 'string', nullable: false })
+  @Column({ type: 'text', nullable: false })
   password: string;
 }
