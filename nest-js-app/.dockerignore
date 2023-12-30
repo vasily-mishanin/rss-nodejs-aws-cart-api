@@ -1,0 +1,13 @@
+# these directories are not typically needed in a production runtime environment.
+
+node_modules
+dist
+
+.git
+.vscode
+.idea
+.env
+.dockerignore
+Dockerfile
+.eslintrc.js
+.prettierrc
