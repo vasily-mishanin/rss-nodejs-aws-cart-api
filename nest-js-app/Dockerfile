@@ -32,6 +32,12 @@ WORKDIR /app
 # COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 
+ENV DATABASE_HOST=rds-cart-database.cxrsba5xkeln.us-east-1.rds.amazonaws.com
+ENV DATABASE_PORT=5432
+ENV DATABASE_USERNAME=student
+ENV DATABASE_PASSWORD=AZberserker!934
+ENV DATABASE_NAME=cart_database_rss
+
 # Expose the port the app runs on
 EXPOSE 4000
 
