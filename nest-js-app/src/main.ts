@@ -40,7 +40,7 @@ async function bootstrap() {
     app.use(helmet());
 
     await app.init();
-    await app.listen(port);
+    await app.listen(port, '0.0.0.0');
 
     server = serverlessExpress({ app: expressApp });
   }
