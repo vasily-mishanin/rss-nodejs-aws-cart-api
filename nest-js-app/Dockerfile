@@ -29,7 +29,7 @@ FROM node:current-alpine3.19
 # Set the working directory
 WORKDIR /app
 # Copy only the necessary files from the previous stage
-# COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 
 ENV DATABASE_HOST=rds-cart-database.cxrsba5xkeln.us-east-1.rds.amazonaws.com
