@@ -1,7 +1,7 @@
-ARG base_image=node:current-alpine3.19
+#ARG base_image=node:current-alpine3.19
 
 # --- stage 1 ---
-FROM $base_image as builder
+FROM node:current-alpine3.19 as builder
 
 #ENV NODE_VERSION 18.19.0
 
@@ -26,7 +26,7 @@ RUN npm run build
 
 # --- stage 2 ---
 # -----> Start a NEW stage with a smaller base image
-FROM $base_image
+FROM node:current-alpine3.19
 # Set the working directory
 WORKDIR /app
 # Copy only the necessary files from the previous stage
