@@ -38,10 +38,11 @@ ENV DATABASE_PORT=5432
 ENV DATABASE_USERNAME=student
 ENV DATABASE_PASSWORD=AZberserker!934
 ENV DATABASE_NAME=cart_database_rss
+ENV PORT=4000
 
 # Expose the port the app runs on
 EXPOSE 4000
 
 # Command to run app
 # CMD ["npm", "run", "start:prod"]
-CMD ["node", "dist/main"]
+CMD ["nest", "start"]
