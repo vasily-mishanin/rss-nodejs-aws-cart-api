@@ -30,7 +30,7 @@ FROM node:current-alpine3.19
 # Set the working directory
 WORKDIR /app
 # Copy only the necessary files from the previous stage
-COPY --from=builder /app/package.json ./package.json
+#COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 
@@ -39,10 +39,12 @@ ENV DATABASE_PORT=5432
 ENV DATABASE_USERNAME=student
 ENV DATABASE_PASSWORD=AZberserker!934
 ENV DATABASE_NAME=cart_database_rss
-ENV PORT=4000
 
+
+ENV PORT=8080
 # Expose the port the app runs on
-EXPOSE 4000
+EXPOSE 8080
 
 # Command to run app
-CMD ["npm", "run", "start:prod"]
+# CMD ["npm", "run", "start:prod"]
+CMD ["node", "dist/main.js"]
