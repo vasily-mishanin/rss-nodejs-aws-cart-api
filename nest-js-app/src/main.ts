@@ -50,7 +50,7 @@ async function bootstrap() {
 
 bootstrap().then(() => {
   console.log('App is running on %s port', port);
-  console.log('Database NAme', process.env.DATABASE_NAME);
+  console.log('Database name', process.env.DATABASE_NAME);
 });
 
 // ADD "build": "nest build --webpack", to scripts

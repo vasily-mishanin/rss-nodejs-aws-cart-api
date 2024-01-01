@@ -30,7 +30,8 @@ FROM node:current-alpine3.19
 # Set the working directory
 WORKDIR /app
 # Copy only the necessary files from the previous stage
-# COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 
 ENV DATABASE_HOST=rds-cart-database.cxrsba5xkeln.us-east-1.rds.amazonaws.com
@@ -44,5 +45,4 @@ ENV PORT=4000
 EXPOSE 4000
 
 # Command to run app
-# CMD ["npm", "run", "start:prod"]
-CMD ["nest", "start"]
+CMD ["npm", "run", "start:prod"]
