@@ -40,7 +40,8 @@ async function bootstrap() {
     app.use(helmet());
 
     await app.init();
-    await app.listen(port);
+    await app.listen(port, '0.0.0.0');
+    // console.log('App is running on %s port', port);
 
     server = serverlessExpress({ app: expressApp });
   }
@@ -49,15 +50,17 @@ async function bootstrap() {
 
 bootstrap().then(() => {
   console.log('App is running on %s port', port);
+  console.log('Database name', process.env.DATABASE_NAME);
 });
 
-export const handler: Handler = async (
-  event: any,
-  context: Context,
-  callback: Callback,
-) => {
-  console.log(process.env);
-  const server = await bootstrap();
-  console.log('App is running on port ', port);
-  return server(event, context, callback);
-};
+// ADD "build": "nest build --webpack", to scripts
+// export const handler: Handler = async (
+//   event: any,
+//   context: Context,
+//   callback: Callback,
+// ) => {
+//   console.log(process.env);
+//   const server = await bootstrap();
+//   console.log('App is running on port ', port);
+//   return server(event, context, callback);
+// };
